@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #echequier{display: block;}
+        #echequier ul{
+            border: 20px solid transparent;
+            border-image: url(boit.png) 8 round;
+        }
+    </style>
+</head>
+<body>
+    <div id="echequier"></div>
+    <script>
+        loadEchequier(document.getElementById("echequier"),{case_width : 50});
+        function loadEchequier(echequier,params = {}) {
+            if (typeof echequier != "undefined" && echequier != null) {
+                var ul = document.createElement("ul"),li = document.createElement("li"),
+                wcs = typeof params.case_width == "number"?params.case_width:30,
+                c1="#fff496",c2 = "#a63306",color = c1,cs_line = 0,line = 0,cl_s = c1;
+                for (var i = 0; i < 64; i++) {
+                    var cs = li.cloneNode();
+                    
+                    cs.style.background = color;
+                    cs.style.height = wcs+"px";
+                    cs.style.width = wcs+"px";
+                    cs.style.display = "block";
+                    cs.style.display = "block";
+                    ul.appendChild(cs);
+                    cs_line++;
+                    color = color==c2?c1:c2;
+                    if (cs_line==8) {
+                        line++;
+                        cs_line = 0;
+                        cl_s = cl_s==c2?c1:c2;
+                        color = cl_s;
+                    }
+
+                }
+                ul.style.display = "flex";
+                ul.style["flex-wrap"] =  "wrap";
+                ul.style.padding=  "0px";
+                ul.style.margin=  "3em auto";
+                ul.style.width=  (8*wcs)+"px";
+                ul.style.height =  (8*wcs)+"px";
+                echequier.appendChild(ul);
+            }
+        }
+    </script>
+</body>
+</html>
